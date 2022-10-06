@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/06 22:16:31 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/06 22:25:43 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	nl_in_str(const char *str)
 	return (0);
 }
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -30,28 +30,28 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_rejoin(char *s1, char *s2)
+char	*ft_rejoin(char *stash, const char *buf)
 {
 	int		i;
 	int		j;
 	char	*out;
 
-	out = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	out = malloc(sizeof(char) * (ft_strlen(stash) + ft_strlen(buf) + 1));
 	i = 0;
-	while (s1[i])
+	while (stash[i])
 	{
-		out[i] = s1[i];
+		out[i] = stash[i];
 		i++;
 	}
 	j = 0;
-	while (s2[j])
-		out[i++] = s2[j++];
+	while (buf[j])
+		out[i++] = buf[j++];
 	out[i] = '\0';
-	free(s1);
+	free(stash);
 	return (out);
 }
 
-char	*init_stash(char *buf)
+char	*init_stash(const char *buf)
 {
 	int		i;
 	char	*out;
@@ -77,7 +77,7 @@ char	*get_next_line(int fd)
 		else
 			stash = ft_rejoin(stash, buf);
 		while (nl_in_str(stash))
-			//Find index of nl / split to out = substr to return / stash the rest of the string
+		//Find index of nl / split to out = substr to return / stash the rest of the string
 	}
-	return (out);
+	return (stash);
 }
