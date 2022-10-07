@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 22:20:09 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:29:59 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 	ret = read(fd, (void *)0, 0);
 	if (fd < 0 || ret < 0)
 		return (NULL);
-	while (ret >= 0)
+	while (!ret || ret == BUFFER_SIZE)
 	{
 		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		ft_bzero(buf, (BUFFER_SIZE + 1));
