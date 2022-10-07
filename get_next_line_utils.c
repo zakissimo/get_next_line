@@ -6,13 +6,13 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 19:17:05 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:27:13 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	nl_in_str(const char *str)
+int	nl_in_str(char *str)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ int	nl_in_str(const char *str)
 	return (-1);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -38,10 +38,13 @@ char	*init_stash(char *buf)
 	int		i;
 	char	*out;
 
-	i = -1;
+	i = 0;
 	out = malloc(ft_strlen(buf) + 1);
-	while (buf[++i])
+	while (buf[i])
+	{
 		out[i] = buf[i];
+		i++;
+	}
 	out[i] = '\0';
 	free(buf);
 	return (out);

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 19:16:40 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:38:53 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ char	*ft_rejoin(char *stash, char *buf)
 	return (out);
 }
 
-char	**split_to_tab(char **tab, int nl_idx, char *stash)
+char	**split_to_tab(int nl_idx, char *stash)
 {
 	int		i;
 	int		j;
 	char	*out;
+	char	**tab;
 	char	*new_stash;
 
 	i = 0;
+	tab = malloc(sizeof(char *) * 3);
 	out = malloc((nl_idx + 2) * sizeof(char *));
 	if (ft_strlen(stash) - nl_idx)
 		new_stash = malloc(ft_strlen(stash) - nl_idx + 1);
@@ -68,10 +70,10 @@ char	**split_to_tab(char **tab, int nl_idx, char *stash)
 char	*get_next_line(int fd)
 {
 	int			ret;
-	static char	*stash;
 	char		*out;
 	char		**tab;
 	char		*buf;
+	static char	*stash = NULL;
 
 	if (fd <= 0)
 		return (NULL);
@@ -91,8 +93,7 @@ char	*get_next_line(int fd)
 			stash = ft_rejoin(stash, buf);
 		if (nl_in_str(stash) >= 0)
 		{
-			tab = malloc(sizeof(char *) * 3);
-			tab = split_to_tab(tab, nl_in_str(stash), stash);
+			tab = split_to_tab(nl_in_str(stash), stash);
 			stash = tab[0];
 			out = tab[1];
 			free(tab);
@@ -102,5 +103,6 @@ char	*get_next_line(int fd)
 		if (!ret)
 			return (stash);
 	}
+	free(buf);
 	return (NULL);
 }
