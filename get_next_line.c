@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 19:38:53 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:20:09 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,38 @@ char	**split_to_tab(int nl_idx, char *stash)
 	return (tab);
 }
 
+void	ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*arr;
+
+	i = 0;
+	arr = (unsigned char *)s;
+	while (i < n)
+		arr[i++] = '\0';
+}
+
 char	*get_next_line(int fd)
 {
 	int			ret;
-	char		*out;
 	char		**tab;
 	char		*buf;
-	static char	*stash = NULL;
+	static char	*stash;
 
-	if (fd <= 0)
+	stash = NULL;
+	ret = read(fd, (void *)0, 0);
+	if (fd < 0 || ret < 0)
 		return (NULL);
-	out = NULL;
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	ret = read(fd, buf, BUFFER_SIZE);
-	if (ret < 0)
+	while (ret >= 0)
 	{
-		free(buf);
-		return (NULL);
-	}
-	while (ret > 0)
-	{
+		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		ft_bzero(buf, (BUFFER_SIZE + 1));
+		ret = read(fd, buf, BUFFER_SIZE);
+		if (ret < BUFFER_SIZE)
+		{
+			free(buf);
+			return (stash);
+		}
 		if (!stash)
 			stash = init_stash(buf);
 		else
@@ -95,13 +107,10 @@ char	*get_next_line(int fd)
 		{
 			tab = split_to_tab(nl_in_str(stash), stash);
 			stash = tab[0];
-			out = tab[1];
+			buf = tab[1];
 			free(tab);
-			return (out);
+			return (buf);
 		}
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (!ret)
-			return (stash);
 	}
 	free(buf);
 	return (NULL);

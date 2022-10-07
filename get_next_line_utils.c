@@ -6,11 +6,12 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 19:27:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:12:30 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int	nl_in_str(char *str)
 {
