@@ -6,14 +6,15 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 17:26:09 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:16:40 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-char	*ft_rejoin(char *stash, const char *buf)
+char	*ft_rejoin(char *stash, char *buf)
 {
 	int		i;
 	int		j;
@@ -29,6 +30,7 @@ char	*ft_rejoin(char *stash, const char *buf)
 	out[i] = '\0';
 	if (stash)
 		free(stash);
+	free(buf);
 	return (out);
 }
 
@@ -69,19 +71,24 @@ char	*get_next_line(int fd)
 	static char	*stash;
 	char		*out;
 	char		**tab;
-	char		buf[BUFFER_SIZE];
+	char		*buf;
 
-	if (fd <= 0 || fd >= 1000)
+	if (fd <= 0)
 		return (NULL);
 	out = NULL;
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	ret = read(fd, buf, BUFFER_SIZE);
+	if (ret < 0)
+	{
+		free(buf);
+		return (NULL);
+	}
 	while (ret > 0)
 	{
 		if (!stash)
 			stash = init_stash(buf);
 		else
 			stash = ft_rejoin(stash, buf);
-		// printf("%s\n", stash);
 		if (nl_in_str(stash) >= 0)
 		{
 			tab = malloc(sizeof(char *) * 3);
@@ -95,7 +102,5 @@ char	*get_next_line(int fd)
 		if (!ret)
 			return (stash);
 	}
-	// free(stash);
-	// free(out);
 	return (NULL);
 }

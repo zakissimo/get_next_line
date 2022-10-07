@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 08:16:10 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:17:05 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*init_stash(const char *buf)
+char	*init_stash(char *buf)
 {
 	int		i;
 	char	*out;
@@ -43,5 +43,6 @@ char	*init_stash(const char *buf)
 	while (buf[++i])
 		out[i] = buf[i];
 	out[i] = '\0';
+	free(buf);
 	return (out);
 }
