@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/06 22:25:43 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/06 22:32:44 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@ char	*ft_rejoin(char *stash, const char *buf)
 	char	*out;
 
 	out = malloc(sizeof(char) * (ft_strlen(stash) + ft_strlen(buf) + 1));
-	i = 0;
-	while (stash[i])
-	{
+	i = -1;
+	while (stash[++i])
 		out[i] = stash[i];
-		i++;
-	}
 	j = 0;
 	while (buf[j])
 		out[i++] = buf[j++];
@@ -70,13 +67,13 @@ char	*get_next_line(int fd)
 	char		*out;
 	char		buf[BUFFER_SIZE];
 
-	while (read(1, buf, BUFFER_SIZE))
+	while (read(fd, buf, BUFFER_SIZE))
 	{
 		if (!stash)
 			stash = init_stash(buf);
 		else
 			stash = ft_rejoin(stash, buf);
-		while (nl_in_str(stash))
+		if (nl_in_str(stash))
 		//Find index of nl / split to out = substr to return / stash the rest of the string
 	}
 	return (stash);
