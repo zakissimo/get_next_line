@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:27:00 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 08:10:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:52:04 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ char		*get_next_line(int fd);
 int			nl_in_str(const char *str);
 int			ft_strlen(const char *str);
 char		*init_stash(const char *buf);
+char		*ft_rejoin(char *stash, const char *buf);
+char		**split_to_tab(char **tab, int nl_idx, char *stash);
+void		free_tab(char **tab);
 
 #endif
