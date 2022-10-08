@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 09:12:02 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/08 09:43:38 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ char	**split_to_tab(int nl_idx, char *stash)
 	char	*new_stash;
 
 	i = 0;
-	tab = malloc(sizeof(char *) * 3);
+	tab = malloc(sizeof(char *) * 2);
 	out = malloc((nl_idx + 2) * sizeof(char *));
-	if (ft_strlen(stash) - nl_idx)
-		new_stash = malloc(ft_strlen(stash) - nl_idx + 1);
+	new_stash = malloc(ft_strlen(stash) - nl_idx + 1);
 	while (i < nl_idx)
 	{
 		out[i] = stash[i];
@@ -57,14 +56,20 @@ char	**split_to_tab(int nl_idx, char *stash)
 	j = 0;
 	while (stash[i])
 		new_stash[j++] = stash[i++];
-	if (j)
-		new_stash[j] = '\0';
-	else
-		new_stash = NULL;
+	new_stash[j] = '\0';
 	free(stash);
+	if (!i)
+	{
+		free(out);
+		out = NULL;
+	}
+	if (!j)
+	{
+		free(new_stash);
+		new_stash = NULL;
+	}
 	tab[0] = new_stash;
 	tab[1] = out;
-	tab[2] = NULL;
 	return (tab);
 }
 
@@ -84,8 +89,9 @@ char	*get_next_line(int fd)
 	int			ret;
 	char		**tab;
 	char		*buf;
-	static char	*stash = NULL;
+	static char	*stash;
 
+	stash = NULL;
 	ret = read(fd, (void *)0, 0);
 	if (fd < 0 || ret < 0)
 		return (NULL);
@@ -95,7 +101,8 @@ char	*get_next_line(int fd)
 	while (ret)
 	{
 		stash = ft_rejoin(stash, buf);
-		if (nl_in_str(stash) >= 0)
+		if (nl_in_str(stash) >= 0
+			&& nl_in_str(stash) != ft_strlen(stash) - 1)
 		{
 			tab = split_to_tab(nl_in_str(stash), stash);
 			stash = tab[0];
@@ -103,6 +110,8 @@ char	*get_next_line(int fd)
 			free(tab);
 			return (buf);
 		}
+		else if (nl_in_str(stash) == ft_strlen(stash) - 1)
+			return (stash);
 		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		ft_bzero(buf, (BUFFER_SIZE + 1));
 		ret = read(fd, buf, BUFFER_SIZE);
