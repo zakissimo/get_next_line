@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/07 22:29:59 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/08 09:12:02 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_rejoin(char *stash, char *buf)
 	int		j;
 	char	*out;
 
+	if (!stash)
+		return (buf);
 	out = malloc(sizeof(char) * (ft_strlen(stash) + ft_strlen(buf) + 1));
 	i = -1;
 	while (stash[++i])
@@ -28,8 +30,7 @@ char	*ft_rejoin(char *stash, char *buf)
 	while (buf[j])
 		out[i++] = buf[j++];
 	out[i] = '\0';
-	if (stash)
-		free(stash);
+	free(stash);
 	free(buf);
 	return (out);
 }
@@ -83,26 +84,17 @@ char	*get_next_line(int fd)
 	int			ret;
 	char		**tab;
 	char		*buf;
-	static char	*stash;
+	static char	*stash = NULL;
 
-	stash = NULL;
 	ret = read(fd, (void *)0, 0);
 	if (fd < 0 || ret < 0)
 		return (NULL);
-	while (!ret || ret == BUFFER_SIZE)
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	ft_bzero(buf, (BUFFER_SIZE + 1));
+	ret = read(fd, buf, BUFFER_SIZE);
+	while (ret)
 	{
-		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		ft_bzero(buf, (BUFFER_SIZE + 1));
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret < BUFFER_SIZE)
-		{
-			free(buf);
-			return (stash);
-		}
-		if (!stash)
-			stash = init_stash(buf);
-		else
-			stash = ft_rejoin(stash, buf);
+		stash = ft_rejoin(stash, buf);
 		if (nl_in_str(stash) >= 0)
 		{
 			tab = split_to_tab(nl_in_str(stash), stash);
@@ -110,6 +102,14 @@ char	*get_next_line(int fd)
 			buf = tab[1];
 			free(tab);
 			return (buf);
+		}
+		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		ft_bzero(buf, (BUFFER_SIZE + 1));
+		ret = read(fd, buf, BUFFER_SIZE);
+		if (ret < BUFFER_SIZE)
+		{
+			free(buf);
+			return (stash);
 		}
 	}
 	free(buf);
