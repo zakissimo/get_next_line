@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 09:43:38 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/08 11:30:33 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_rejoin(char *stash, char *buf)
 	char	*out;
 
 	if (!stash)
-		return (buf);
+		return (init_stash(buf));
 	out = malloc(sizeof(char) * (ft_strlen(stash) + ft_strlen(buf) + 1));
 	i = -1;
 	while (stash[++i])
@@ -89,9 +89,8 @@ char	*get_next_line(int fd)
 	int			ret;
 	char		**tab;
 	char		*buf;
-	static char	*stash;
+	static char	*stash = NULL;
 
-	stash = NULL;
 	ret = read(fd, (void *)0, 0);
 	if (fd < 0 || ret < 0)
 		return (NULL);
