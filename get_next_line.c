@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 12:53:44 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/08 13:09:57 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,5 @@ char	*get_next_line(int fd)
 			return (stash);
 		}
 	}
-	free(buf);
-	return (NULL);
+	return (buf);
 }
