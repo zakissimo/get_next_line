@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 11:30:33 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/08 12:53:44 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*get_next_line(int fd)
 	{
 		stash = ft_rejoin(stash, buf);
 		if (nl_in_str(stash) >= 0
-			&& nl_in_str(stash) != ft_strlen(stash) - 1)
+			&& nl_in_str(stash) != ft_strlen(stash))
 		{
 			tab = split_to_tab(nl_in_str(stash), stash);
 			stash = tab[0];
