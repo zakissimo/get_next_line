@@ -6,13 +6,11 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 13:09:57 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/09 20:12:00 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 char	*ft_rejoin(char *stash, char *buf)
 {
@@ -86,39 +84,4 @@ void	ft_bzero(void *s, size_t n)
 
 char	*get_next_line(int fd)
 {
-	int			ret;
-	char		**tab;
-	char		*buf;
-	static char	*stash = NULL;
-
-	ret = read(fd, (void *)0, 0);
-	if (fd < 0 || ret < 0)
-		return (NULL);
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	ft_bzero(buf, (BUFFER_SIZE + 1));
-	ret = read(fd, buf, BUFFER_SIZE);
-	while (ret)
-	{
-		stash = ft_rejoin(stash, buf);
-		if (nl_in_str(stash) >= 0
-			&& nl_in_str(stash) != ft_strlen(stash))
-		{
-			tab = split_to_tab(nl_in_str(stash), stash);
-			stash = tab[0];
-			buf = tab[1];
-			free(tab);
-			return (buf);
-		}
-		else if (nl_in_str(stash) == ft_strlen(stash) - 1)
-			return (stash);
-		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		ft_bzero(buf, (BUFFER_SIZE + 1));
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret < BUFFER_SIZE)
-		{
-			free(buf);
-			return (stash);
-		}
-	}
-	return (buf);
 }

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/08 09:38:11 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/09 20:07:52 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	nl_in_str(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (-1);
 	while (str[i])
 		if (str[i++] == '\n')
 			return (i);
-	return (-42);
+	return (-1);
 }
 
 int	ft_strlen(char *str)
