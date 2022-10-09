@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/09 21:35:37 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/09 22:16:06 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,18 @@ char	*ft_rejoin(char *stash, char *buf)
 		out[i++] = buf[j++];
 	out[i] = '\0';
 	free(stash);
-	free(buf);
 	return (out);
 }
 
-char	**split_to_tab(int nl_idx, char *stash)
+char	**split_to_tab(char **tab, int nl_idx, char *stash)
 {
 	int		i;
 	int		j;
 	char	*out;
-	char	**tab;
 	char	*new_stash;
 
 	i = 0;
 	j = 0;
-	tab = malloc(sizeof(char *) * 2);
 	out = malloc((nl_idx + 2) * sizeof(char *));
 	new_stash = malloc(ft_strlen(stash) - nl_idx + 1);
 	while (i < nl_idx)
