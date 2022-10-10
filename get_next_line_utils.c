@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/09 22:16:06 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 12:34:01 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*ft_rejoin(char *stash, char *buf)
 		out[i++] = buf[j++];
 	out[i] = '\0';
 	free(stash);
+	free(buf);
 	return (out);
 }
 

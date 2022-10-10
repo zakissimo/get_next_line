@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 08:55:19 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/09 18:32:23 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:24:12 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	int		i;
 
 	i = 3;
-	fd = open("gnlTester/files/nl", O_RDWR);
+	fd = open("./gnlTester/files/41_no_nl", O_RDWR);
 	while (i)
 	{
 		kek = get_next_line(fd);
