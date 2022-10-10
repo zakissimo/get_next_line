@@ -6,12 +6,11 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/10 15:37:30 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:26:10 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdlib.h>
 
 static char	*get_out(char **stash, int ret)
 {
@@ -41,11 +40,10 @@ static char	*get_out(char **stash, int ret)
 
 char	*get_next_line(int fd)
 {
-	static char	**stash = NULL;
+	static char	*stash[1024] = {NULL};
 	int			ret;
 	char		*buf;
 
-	stash = malloc(sizeof(char *) * 1024);
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, (void *)0, 0) == -1)
 		return (NULL);
 	ret = 1;
