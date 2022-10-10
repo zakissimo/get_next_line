@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:27:00 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/10 19:54:24 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 20:07:33 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-typedef struct s_node
-{
-	char	*stash;
-	char	*out;
-}			t_node;
 
 char		*get_next_line(int fd);
 int			nl_in_str(char *str);
