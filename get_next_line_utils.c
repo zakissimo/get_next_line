@@ -6,13 +6,13 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/10 12:34:01 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:42:16 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*init_stash(char *buf)
+char	*ft_strdup(char *buf)
 {
 	int		i;
 	char	*out;
@@ -36,7 +36,7 @@ char	*ft_rejoin(char *stash, char *buf)
 	char	*out;
 
 	if (!stash)
-		return (init_stash(buf));
+		return (ft_strdup(buf));
 	out = malloc(sizeof(char) * (ft_strlen(stash) + ft_strlen(buf) + 1));
 	i = -1;
 	while (stash[++i])

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:27:00 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/09 22:04:19 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:40:14 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ typedef struct s_node
 char		*get_next_line(int fd);
 int			nl_in_str(char *str);
 int			ft_strlen(char *str);
-char		*init_stash(char *buf);
+char		*ft_strdup(char *buf);
 char		*ft_rejoin(char *stash, char *buf);
 char		**split_to_tab(char **tab, int nl_idx, char *stash);
-void		free_tab(char **tab);
 char		*ft_rejoin(char *stash, char *buf);
 
 #endif
