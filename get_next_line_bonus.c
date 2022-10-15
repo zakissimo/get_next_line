@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/10 19:54:18 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/13 22:42:37 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 	int			ret;
 	char		*buf;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, (void *)0, 0) == -1)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	ret = 1;
 	while (ret && nl_in_str(stash[fd]) == -1)
