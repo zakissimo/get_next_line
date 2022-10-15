@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/15 12:34:23 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/15 12:35:31 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static char	*get_out(char **stash, int ret)
 		|| (nl_in_str(*stash) == ft_strlen(*stash)))
 	{
 		out = ft_strdup(*stash);
+		*stash = NULL;
 		return (out);
 	}
 	if (nl_in_str(*stash) != -1)
