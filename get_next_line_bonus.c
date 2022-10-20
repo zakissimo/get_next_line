@@ -6,18 +6,18 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/20 17:21:50 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/20 17:32:12 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*get_out(char **stash, int ret)
+static char	*get_out(char **stash)
 {
 	char		*out;
 	char		**tab;
 
-	if ((!ret && nl_in_str(*stash) == -1)
+	if ((nl_in_str(*stash) == -1)
 		|| (nl_in_str(*stash) == ft_strlen(*stash)))
 	{
 		out = ft_strdup(*stash);
@@ -57,5 +57,5 @@ char	*get_next_line(int fd)
 		buf[ret] = '\0';
 		stash[fd] = ft_rejoin(stash[fd], buf);
 	}
-	return (get_out(&stash[fd], ret));
+	return (get_out(&stash[fd]));
 }
