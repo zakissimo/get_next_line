@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:55 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/10 14:42:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/20 17:18:09 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**split_to_tab(char **tab, int nl_idx, char *stash)
 
 	i = 0;
 	j = 0;
-	out = malloc((nl_idx + 2) * sizeof(char *));
+	out = malloc(nl_idx + 1);
 	new_stash = malloc(ft_strlen(stash) - nl_idx + 1);
 	while (i < nl_idx)
 	{
