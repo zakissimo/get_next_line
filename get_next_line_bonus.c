@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/13 22:42:37 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/20 17:21:50 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,14 @@ static char	*get_out(char **stash, int ret)
 		*stash = NULL;
 		return (out);
 	}
-	if (nl_in_str(*stash) != -1)
-	{
-		tab = malloc(sizeof(char *) * 2);
-		if (!tab)
-			return (NULL);
-		tab = split_to_tab(tab, nl_in_str(*stash), *stash);
-		*stash = tab[0];
-		out = tab[1];
-		free(tab);
-		return (out);
-	}
-	return (NULL);
+	tab = malloc(sizeof(char *) * 2);
+	if (!tab)
+		return (NULL);
+	tab = split_to_tab(tab, nl_in_str(*stash), *stash);
+	*stash = tab[0];
+	out = tab[1];
+	free(tab);
+	return (out);
 }
 
 char	*get_next_line(int fd)
