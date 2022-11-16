@@ -6,36 +6,32 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 08:47:44 by zhabri            #+#    #+#             */
-/*   Updated: 2022/10/13 22:42:37 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/10/20 17:32:12 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*get_out(char **stash, int ret)
+static char	*get_out(char **stash)
 {
 	char		*out;
 	char		**tab;
 
-	if ((!ret && nl_in_str(*stash) == -1)
+	if ((nl_in_str(*stash) == -1)
 		|| (nl_in_str(*stash) == ft_strlen(*stash)))
 	{
 		out = ft_strdup(*stash);
 		*stash = NULL;
 		return (out);
 	}
-	if (nl_in_str(*stash) != -1)
-	{
-		tab = malloc(sizeof(char *) * 2);
-		if (!tab)
-			return (NULL);
-		tab = split_to_tab(tab, nl_in_str(*stash), *stash);
-		*stash = tab[0];
-		out = tab[1];
-		free(tab);
-		return (out);
-	}
-	return (NULL);
+	tab = malloc(sizeof(char *) * 2);
+	if (!tab)
+		return (NULL);
+	tab = split_to_tab(tab, nl_in_str(*stash), *stash);
+	*stash = tab[0];
+	out = tab[1];
+	free(tab);
+	return (out);
 }
 
 char	*get_next_line(int fd)
@@ -61,5 +57,5 @@ char	*get_next_line(int fd)
 		buf[ret] = '\0';
 		stash[fd] = ft_rejoin(stash[fd], buf);
 	}
-	return (get_out(&stash[fd], ret));
+	return (get_out(&stash[fd]));
 }

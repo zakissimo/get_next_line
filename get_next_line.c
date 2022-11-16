@@ -12,30 +12,26 @@
 
 #include "get_next_line.h"
 
-static char	*get_out(char **stash, int ret)
+static char	*get_out(char **stash)
 {
 	char		*out;
 	char		**tab;
 
-	if ((!ret && nl_in_str(*stash) == -1)
+	if ((nl_in_str(*stash) == -1)
 		|| (nl_in_str(*stash) == ft_strlen(*stash)))
 	{
 		out = ft_strdup(*stash);
 		*stash = NULL;
 		return (out);
 	}
-	if (nl_in_str(*stash) != -1)
-	{
-		tab = malloc(sizeof(char *) * 2);
-		if (!tab)
-			return (NULL);
-		tab = split_to_tab(tab, nl_in_str(*stash), *stash);
-		*stash = tab[0];
-		out = tab[1];
-		free(tab);
-		return (out);
-	}
-	return (NULL);
+	tab = malloc(sizeof(char *) * 2);
+	if (!tab)
+		return (NULL);
+	tab = split_to_tab(tab, nl_in_str(*stash), *stash);
+	*stash = tab[0];
+	out = tab[1];
+	free(tab);
+	return (out);
 }
 
 char	*get_next_line(int fd)
@@ -61,5 +57,5 @@ char	*get_next_line(int fd)
 		buf[ret] = '\0';
 		stash = ft_rejoin(stash, buf);
 	}
-	return (get_out(&stash, ret));
+	return (get_out(&stash));
 }
